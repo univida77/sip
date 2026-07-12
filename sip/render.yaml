@@ -2,22 +2,17 @@ services:
   - type: web
     name: sistema-parroquial-api
     runtime: python
-
-    rootDir: sip
-
     plan: free
 
-    buildCommand: |
-      pip install --upgrade pip
-      pip install -r requirements.txt
-      mkdir -p data
+    rootDir: sip/backend
 
-    startCommand: |
-      uvicorn main:app --host 0.0.0.0 --port $PORT
+    buildCommand: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
+
+    startCommand: python -m uvicorn main:app --host 0.0.0.0 --port $PORT
 
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.11
+        value: "3.11.11"
 
       - key: ENVIRONMENT
         value: production
