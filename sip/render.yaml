@@ -1,0 +1,53 @@
+services:
+  - type: web
+    name: sistema-parroquial-api
+    runtime: python
+
+    rootDir: backend
+
+    plan: free
+
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      mkdir -p data
+
+    startCommand: |
+      uvicorn main:app --host 0.0.0.0 --port $PORT
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+
+      - key: ENVIRONMENT
+        value: production
+
+      - key: SQLITE_URL
+        value: sqlite:///./data/parroquial.db
+
+      - key: SECRET_KEY
+        generateValue: true
+
+      - key: ALGORITHM
+        value: HS256
+
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "60"
+
+      - key: REFRESH_TOKEN_EXPIRE_DAYS
+        value: "7"
+
+      - key: ALLOWED_ORIGINS
+        value: "*"
+
+      - key: ADMIN_EMAIL
+        value: admin@parroquia.mx
+
+      - key: ADMIN_PASSWORD
+        value: admin123
+
+      - key: ADMIN_NOMBRE
+        value: Administrador
+
+      - key: ADMIN_APELLIDOS
+        value: Sistema
