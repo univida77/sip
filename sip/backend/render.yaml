@@ -3,7 +3,7 @@ services:
     name: sistema-parroquial-api
     runtime: python
 
-    rootDir: backend
+    rootDir: sip/backend
 
     plan: free
 
